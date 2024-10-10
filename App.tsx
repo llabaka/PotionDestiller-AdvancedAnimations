@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { FlatList } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { Animated, FlatList } from 'react-native';
 import { StatusBar } from 'react-native';
 import styled from 'styled-components/native'
 import Rating from './components/Rating';
@@ -75,6 +75,8 @@ function App(): React.JSX.Element {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loaded, setLoaded] = useState(false);
 
+  const scrollX = useRef(new Animated.Value(0)).current;
+
   useEffect(() => {
     const data = moviesData();
     setMovies(data);
@@ -88,9 +90,15 @@ function App(): React.JSX.Element {
   return (
     <Container>
       <StatusBar />
-      <FlatList
+      <Animated.FlatList
+
         snapToInterval={CONSTANTS.ITEM_SIZE}
         decelerationRate={0}
+        onScroll={Animated.event(
+          [{ nativeEvent: {contentOffset: {x: scrollX}}}],
+          { useNativeDriver: true}
+        )}
+        scrollEventThrottle={16}
         showsHorizontalScrollIndicator={false}
         data={movies}
         keyExtractor={item => item.id}
@@ -98,10 +106,21 @@ function App(): React.JSX.Element {
         contentContainerStyle={{
           alignItems:'center'
         }}
-        renderItem={({ item }) =>{
+
+        renderItem={({ item, index }) =>{
+          const inputRange = [
+            (index - 1) * CONSTANTS.ITEM_SIZE,
+            index * CONSTANTS.ITEM_SIZE,
+            (index + 1) * CONSTANTS.ITEM_SIZE
+          ]
+          const translateY = scrollX.interpolate({
+            inputRange,
+            outputRange: [0, -50, 0]
+          })
+
           return (
             <PosterContainer>
-              <Poster>
+              <Poster as= {Animated.View} style={{transform: [{translateY}]}}>
                 <PosterImage source={{uri: item.posterPath}}/>
                 <PosterTitle numberOfLines={1}>{item.title}</PosterTitle>
                 <Rating rating={item.voteAverage} />
