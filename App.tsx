@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Animated, FlatList } from 'react-native';
+import { Animated, FlatList, View, Image } from 'react-native';
 import { StatusBar } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/native'
 import Rating from './components/Rating';
 import Genre from './components/Genre';
