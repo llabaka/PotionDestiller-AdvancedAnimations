@@ -5,7 +5,7 @@ const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&
 export const data = require('./movies.json');
 
 // Función para mapear los datos de las películas
-export const mapMoviesData = () => {
+export const moviesData = () => {
 
     const mappedMovies = data.movies.map(movie => ({
     id: movie.id,

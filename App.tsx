@@ -1,16 +1,14 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { FlatList } from 'react-native';
+import { StatusBar } from 'react-native';
+import styled from 'styled-components';
+import Rating from './components/Rating';
+import Genre from './components/Genre';
+import * as CONSTANTS from './constants/constants'
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
@@ -24,7 +22,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import { mapMoviesData } from './api';
+import { moviesData } from './api';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -60,7 +58,7 @@ function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   useEffect(() => {
-    mapMoviesData(); // Llamar a la función para mapear y mostrar en consola
+    moviesData(); // Llamar a la función para mapear y mostrar en consola
   }, []);
 
   const backgroundStyle = {
