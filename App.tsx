@@ -6,35 +6,14 @@ import Rating from './components/Rating';
 import Genre from './components/Genre';
 import * as CONSTANTS from './constants/constants'
 import { moviesData } from './api';
-import type {PropsWithChildren} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
   StyleSheet,
-  Text,
-  useColorScheme, View,
+  useColorScheme,
 } from 'react-native';
 
 import {
   Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-
-// Interface Movie
-//Especifico que tipo de elementos tendra
-interface Movie {
-  id: any;
-  title: string;
-  releaseDate: string;
-  overview: string;
-  voteAverage: number;
-  posterPath: string;
-  backdropPath: string;
-  genres: string[]; // Cambia esto si tu tipo de género es diferente
-}
 
 //Styled components
 const Container = styled.View`
@@ -69,17 +48,21 @@ const PosterDescription = styled.Text`
     font-size: 12px;
 `
 
+const DummyContainer = styled.View`
+    width: ${CONSTANTS.SPACER_ITEM_SIZE}px;
+`
+
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<any[]>([]);
   const [loaded, setLoaded] = useState(false);
 
   const scrollX = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     const data = moviesData();
-    setMovies(data);
+    setMovies([{id: 'left-spacer'}, ...data, {id: 'right-spacer'}]);
     setLoaded(true)
   }, []);
 
@@ -108,10 +91,13 @@ function App(): React.JSX.Element {
         }}
 
         renderItem={({ item, index }) =>{
+          if(!item.title){
+            return <DummyContainer />
+          }
           const inputRange = [
+            (index - 2) * CONSTANTS.ITEM_SIZE,
             (index - 1) * CONSTANTS.ITEM_SIZE,
-            index * CONSTANTS.ITEM_SIZE,
-            (index + 1) * CONSTANTS.ITEM_SIZE
+            index * CONSTANTS.ITEM_SIZE
           ]
           const translateY = scrollX.interpolate({
             inputRange,
