@@ -8,16 +8,7 @@
         "vote_average": 8.4,
         "overview": "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy.",
         "release_date": "1999-10-15",
-        "genre_ids": [18, 53],
-        "key": "550",
-        "originalTitle": "Fight Club",
-        "posterPath": "/bptfVGEQuv6vDTIMVCHjJ9Dz8PX.jpg",
-        "backdropPath": "/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg",
-        "voteAverage": 8.4,
-        "description": "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy.",
-        "overview": "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy.",
-        "releaseDate": "1999-10-15",
-        "genres": ["Drama", "Thriller"]
+        "genre_ids": [18, 53]
     },
     {
         "id": 299534,
@@ -27,16 +18,7 @@
         "vote_average": 8.3,
         "overview": "After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
         "release_date": "2019-04-24",
-        "genre_ids": [28, 12, 878],
-        "key": "299534",
-        "originalTitle": "Avengers: Endgame",
-        "posterPath": "/or06FN3Dka5tukK1e9sl16pB3iy.jpg",
-        "backdropPath": "/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg",
-        "voteAverage": 8.3,
-        "description": "After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
-        "overview": "After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
-        "releaseDate": "2019-04-24",
-        "genres": ["Action", "Adventure", "Science Fiction"]
+        "genre_ids": [28, 12, 878]
     },
     {
         "id": 278,
@@ -46,16 +28,7 @@
         "vote_average": 8.7,
         "overview": "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden.",
         "release_date": "1994-09-23",
-        "genre_ids": [18, 80],
-        "key": "278",
-        "originalTitle": "The Shawshank Redemption",
-        "posterPath": "/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
-        "backdropPath": "/j9XKiZrVeViAixVRzCta7h1VU9W.jpg",
-        "voteAverage": 8.7,
-        "description": "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden.",
-        "overview": "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden.",
-        "releaseDate": "1994-09-23",
-        "genres": ["Drama", "Crime"]
+        "genre_ids": [18, 80]
     },
     {
         "id": 238,
@@ -65,16 +38,7 @@
         "vote_average": 8.7,
         "overview": "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family.",
         "release_date": "1972-03-14",
-        "genre_ids": [18, 80],
-        "key": "238",
-        "originalTitle": "The Godfather",
-        "posterPath": "/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
-        "backdropPath": "/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg",
-        "voteAverage": 8.7,
-        "description": "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family.",
-        "overview": "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family.",
-        "releaseDate": "1972-03-14",
-        "genres": ["Drama", "Crime"]
+        "genre_ids": [18, 80]
     }
     ]
 }
