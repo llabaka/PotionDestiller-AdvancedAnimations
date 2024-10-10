@@ -17,8 +17,5 @@ export const moviesData = () => {
     backdropPath: movie.backdrop_path,
     genres: movie.genre_ids.map(genreId => GENRES[genreId] || 'Unknown'), // Si tienes un mapeo de géneros
     }));
-
-    console.log(mappedMovies);
-
     return mappedMovies;
 };

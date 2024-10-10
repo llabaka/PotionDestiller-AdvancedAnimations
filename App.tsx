@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList } from 'react-native';
 import { StatusBar } from 'react-native';
-import styled from 'styled-components';
+import styled from 'styled-components/native'
 import Rating from './components/Rating';
 import Genre from './components/Genre';
 import * as CONSTANTS from './constants/constants'
+import { moviesData } from './api';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
-  useColorScheme,
-  View,
+  useColorScheme, View,
 } from 'react-native';
 
 import {
@@ -22,43 +22,63 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import { moviesData } from './api';
 
-type SectionProps = PropsWithChildren<{
+// Interface Movie
+//Especifico que tipo de elementos tendra
+interface Movie {
+  id: any;
   title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
+  releaseDate: string;
+  overview: string;
+  voteAverage: number;
+  posterPath: string;
+  backdropPath: string;
+  genres: string[]; // Cambia esto si tu tipo de género es diferente
 }
+
+//Styled components
+const Container = styled.View`
+    flex: 1;
+`
+
+const PosterContainer = styled.View`
+    width: ${CONSTANTS.ITEM_SIZE}px;
+`
+
+const Poster = styled.View`
+    margin-horizontal: ${CONSTANTS.SPACING}px;
+    padding: ${CONSTANTS.SPACING * 2}px;
+    align-items: center;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+`
+
+const PosterImage = styled.Image`
+    width: 100%;
+    height: ${CONSTANTS.ITEM_SIZE * 1.2}px;
+    resize-mode: cover;
+    border-radius: 10px;
+    margin: 0 0 10px 0;
+`
+
+const PosterTitle = styled.Text`
+    font-size: 18px;
+`
+
+const PosterDescription = styled.Text`
+    font-size: 12px;
+`
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [loaded, setLoaded] = useState(false);
+
   useEffect(() => {
-    moviesData(); // Llamar a la función para mapear y mostrar en consola
+    const data = moviesData();
+    setMovies(data);
+    setLoaded(true)
   }, []);
 
   const backgroundStyle = {
@@ -66,36 +86,31 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+    <Container>
+      <StatusBar />
+      <FlatList
+        showsHorizontalScrollIndicator={false}
+        data={movies}
+        keyExtractor={item => item.id}
+        horizontal
+        contentContainerStyle={{
+          alignItems:'center'
+        }}
+        renderItem={({ item }) =>{
+          return (
+            <PosterContainer>
+              <Poster>
+                <PosterImage source={{uri: item.posterPath}}/>
+                <PosterTitle numberOfLines={1}>{item.title}</PosterTitle>
+                <Rating rating={item.voteAverage} />
+                <Genre genres={item.genres} />
+                <PosterDescription numberOfLines={5}>{item.overview}</PosterDescription>
+              </Poster>
+            </PosterContainer>
+          )
+        }}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    </Container>
   );
 }
 
