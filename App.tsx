@@ -77,10 +77,50 @@ const BackdropImage = styled.Image`
     height: ${CONSTANTS.BACKDROP_HEIGHT}px;
 `
 
+const Backdrop = ({movies, scrollX}) => {
+  return (
+    <ContentContainer>
+      <FlatList
+        data={movies}
+        keyExtractor={item => `${item.key}-back`}
+        removeClippedSubviews={false}
+        contentContainerStyle={{ width: CONSTANTS.WIDTH, height: CONSTANTS.BACKDROP_HEIGHT}}
+        renderItem={({ item, index }) =>{
+          if(!item.backdropPath){
+            return null
+          }
+          const translateX = scrollX.interpolate({
+            inputRange: [(index - 1) * CONSTANTS.ITEM_SIZE, index * CONSTANTS.ITEM_SIZE],
+            outputRange: [0, CONSTANTS.WIDTH]
+          })
+
+          return (
+            <BackdropContainer
+            as={Animated.View}
+            style={{transform:[{translateX: translateX}]}}
+            >
+              <BackdropImage source={{uri:item.backdropPath}}/>
+            </BackdropContainer>
+          )
+        }}
+      />
+      <LinearGradient
+        colors={['rgba(0,0,0,0)', 'black']}
+        style={{
+          height: CONSTANTS.BACKDROP_HEIGHT,
+          width: CONSTANTS.WIDTH,
+          position: 'absolute',
+          bottom: 0
+        }}
+      />
+    </ContentContainer>
+  )
+}
+
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
-  const [movies, setMovies] = useState<any[]>([]);
+  const [movies, setMovies] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -98,9 +138,10 @@ function App(): React.JSX.Element {
 
   return (
     <Container>
+      {/* Render Backdrop */}
+      <Backdrop movies={movies} scrollX={scrollX} />
       <StatusBar />
       <Animated.FlatList
-
         snapToInterval={CONSTANTS.ITEM_SIZE}
         decelerationRate={0}
         onScroll={Animated.event(
@@ -110,7 +151,7 @@ function App(): React.JSX.Element {
         scrollEventThrottle={16}
         showsHorizontalScrollIndicator={false}
         data={movies}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id ? item.id.toString() : item.key}
         horizontal
         contentContainerStyle={{
           alignItems:'center'
