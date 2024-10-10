@@ -17,7 +17,6 @@ const Text = styled.View`
     opcacity. 0.5;
     font-size: 8px;
 `
-
 const Genre = ({genres}) => {
     return (
         <Container>
