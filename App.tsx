@@ -45,11 +45,13 @@ const PosterImage = styled.Image`
 `
 
 const PosterTitle = styled.Text`
+    font-family: SyneMonoRegular;
     font-size: 18px;
     color: #FFF;
 `
 
 const PosterDescription = styled.Text`
+    font-family: SyneMonoRegular;
     font-size: 12px;
     color: #FFF;
 `
@@ -77,7 +79,7 @@ const BackdropImage = styled.Image`
     height: ${CONSTANTS.BACKDROP_HEIGHT}px;
 `
 
-const Backdrop = ({movies, scrollX}) => {
+const Backdrop = ({movies, scrollX}: any) => {
   return (
     <ContentContainer>
       <FlatList
